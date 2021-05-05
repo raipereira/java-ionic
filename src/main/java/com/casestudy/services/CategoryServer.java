@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.casestudy.model.Category;
 import com.casestudy.repositories.CategoryRepository;
+import com.casestudy.services.exceptions.ObjectNotFoundExeption;
 
 @Service
 public class CategoryServer {
@@ -19,7 +20,8 @@ public class CategoryServer {
 		
 		Optional<Category> cp = cr.findById(id);
 		
-		return cp.orElse(null);
+		return cp.orElseThrow(() -> new ObjectNotFoundExeption(
+				"Object it's not found id." + id + " Type " + Category.class.getName()));
 	}
 
 }
