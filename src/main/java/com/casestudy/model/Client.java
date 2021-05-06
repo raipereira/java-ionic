@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.casestudy.model.enums.TipeBusiness;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Client implements Serializable {
@@ -28,6 +29,7 @@ public class Client implements Serializable {
 	private String ssnOrItin;
 	private Integer tipe;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	List<Address> addresses = new ArrayList<>();
 	
@@ -35,6 +37,7 @@ public class Client implements Serializable {
 	@CollectionTable(name = "PHONENUMBER")
 	Set<String> phonenumbers = new HashSet<>();
 	
+	public Client() {}
 
 	public Client(Integer id, String name, String email, String ssnOrItin, TipeBusiness tipe) {
 		super();
