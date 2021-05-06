@@ -7,12 +7,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.casestudy.model.Address;
 import com.casestudy.model.Category;
 import com.casestudy.model.City;
+import com.casestudy.model.Client;
 import com.casestudy.model.Product;
 import com.casestudy.model.State;
+import com.casestudy.model.enums.TipeBusiness;
+import com.casestudy.repositories.AddressRepository;
 import com.casestudy.repositories.CategoryRepository;
 import com.casestudy.repositories.CityRepository;
+import com.casestudy.repositories.ClientRepository;
 import com.casestudy.repositories.ProductRepository;
 import com.casestudy.repositories.StateRepository;
 
@@ -30,6 +35,12 @@ public class JavaionicApplication implements CommandLineRunner {
 	
 	@Autowired
 	StateRepository sr;
+	
+	@Autowired
+	ClientRepository clr;
+	
+	@Autowired
+	AddressRepository addr;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaionicApplication.class, args);
@@ -67,6 +78,16 @@ public class JavaionicApplication implements CommandLineRunner {
 		
 		sr.saveAll(Arrays.asList(s1,s2));
 		ctr.saveAll(Arrays.asList(ct1,ct2,ct3));
+		
+		Client cl1 = new Client(null, "Rai", "raigmail.com", "729729765", TipeBusiness.PRIVATEINDIVIDUAL);
+		
+		cl1.getPhonenumbers().addAll(Arrays.asList("673787654", "987342165"));
+		
+		Address ad1 = new Address(null, "Marten Ave", 1234, "house", 95148, cl1, ct1);
+		Address ad2 = new Address(null, "segund st", 765, "apt 2", 84652, cl1, ct2);
+		
+		clr.save(cl1);
+		addr.saveAll(Arrays.asList(ad1,ad2));
 		
 		
 		
