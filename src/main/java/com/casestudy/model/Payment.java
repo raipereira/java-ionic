@@ -9,6 +9,7 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.casestudy.model.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,15 +19,16 @@ public abstract class Payment {
 	private Integer id;
 	private Integer status;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name= "order_id")
 	@MapsId
-	private Ordering order;
+	private Ordeer order;
 	
 	public Payment() {
 	}
 
-	public Payment(Integer id, StatusPayment status, Ordering order) {
+	public Payment(Integer id, StatusPayment status, Ordeer order) {
 		super();
 		this.id = id;
 		this.status = status.getCod();
@@ -49,11 +51,11 @@ public abstract class Payment {
 		this.status = status.getCod();
 	}
 	
-	public Ordering getOrder() {
+	public Ordeer getOrder() {
 		return order;
 	}
 
-	public void setOrder(Ordering order) {
+	public void setOrder(Ordeer order) {
 		this.order = order;
 	}
 

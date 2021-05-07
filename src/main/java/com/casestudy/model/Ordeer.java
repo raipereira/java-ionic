@@ -1,7 +1,9 @@
 package com.casestudy.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,20 +12,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-public class Ordering implements Serializable {
+public class Ordeer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Date date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "UTC-12:00")
+	private LocalDateTime date;
 	
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
 	private Payment pyment;
 	
+	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
@@ -32,13 +41,16 @@ public class Ordering implements Serializable {
 	@JoinColumn(name = "delivery_address_id")
 	private Address deliveryAddress;
 	
+	@OneToMany(mappedBy = "id.ordeer")
+	private Set<OrderItem> itens = new HashSet<>();
 	
-	public Ordering() {}
+	
+	public Ordeer() {}
 
-	public Ordering(Integer id, Date date, Client client, Address deliveryAddress) {
+	public Ordeer(Integer id, LocalDateTime instant, Client client, Address deliveryAddress) {
 		super();
 		this.id = id;
-		this.date = date;
+		this.date = instant;
 		this.client = client;
 		this.deliveryAddress = deliveryAddress;
 	}
@@ -51,11 +63,11 @@ public class Ordering implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 
@@ -82,6 +94,14 @@ public class Ordering implements Serializable {
 	public void setPyment(Payment pyment) {
 		this.pyment = pyment;
 	}
+	
+	public Set<OrderItem> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<OrderItem> itens) {
+		this.itens = itens;
+	}
 
 	@Override
 	public int hashCode() {
@@ -99,7 +119,7 @@ public class Ordering implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ordering other = (Ordering) obj;
+		Ordeer other = (Ordeer) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -108,6 +128,5 @@ public class Ordering implements Serializable {
 		return true;
 	}
 
-	
 
 }

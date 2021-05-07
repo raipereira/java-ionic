@@ -1,7 +1,11 @@
 package com.casestudy;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -12,7 +16,8 @@ import com.casestudy.model.Address;
 import com.casestudy.model.Category;
 import com.casestudy.model.City;
 import com.casestudy.model.Client;
-import com.casestudy.model.Ordering;
+import com.casestudy.model.Ordeer;
+import com.casestudy.model.OrderItem;
 import com.casestudy.model.Payment;
 import com.casestudy.model.PaymentSlip;
 import com.casestudy.model.PaymentWithCard;
@@ -24,6 +29,7 @@ import com.casestudy.repositories.AddressRepository;
 import com.casestudy.repositories.CategoryRepository;
 import com.casestudy.repositories.CityRepository;
 import com.casestudy.repositories.ClientRepository;
+import com.casestudy.repositories.ItemRepository;
 import com.casestudy.repositories.OrderRepository;
 import com.casestudy.repositories.PaymentRepository;
 import com.casestudy.repositories.ProductRepository;
@@ -48,6 +54,8 @@ public class JavaionicApplication implements CommandLineRunner {
 	OrderRepository or;
 	@Autowired
 	PaymentRepository payr;
+	@Autowired
+	ItemRepository ir;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaionicApplication.class, args);
@@ -95,20 +103,45 @@ public class JavaionicApplication implements CommandLineRunner {
 
 		clr.save(cl1);
 		addr.saveAll(Arrays.asList(ad1, ad2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
+		Instant instant = Instant.parse( "2013-09-29T18:46:19Z");
+		
+		LocalDateTime ld = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+		
+		LocalDateTime ld2 = LocalDateTime.of(2021, 5,5, 10, 20 );
+		
+		
 
-		Ordering order1 = new Ordering(null, new Date(), cl1, ad1);
-		Ordering order2 = new Ordering(null, new Date(), cl1, ad2);
+		Ordeer order1 = new Ordeer(null, ld2, cl1, ad1);
+		Ordeer order2 = new Ordeer(null, ld, cl1, ad2);
 
 		Payment pay1 = new PaymentWithCard(null, StatusPayment.PAID, order1, 5);
 		order1.setPyment(pay1);
 
-		Payment pay2 = new PaymentSlip(null, StatusPayment.PENDING, order2, new Date(), null);
+		Payment pay2 = new PaymentSlip(null, StatusPayment.PENDING, order2, ld, null);
 		order2.setPyment(pay2);
 
 		cl1.getOrders().addAll(Arrays.asList(order1, order2));
 		
 		or.saveAll(Arrays.asList(order1,order2));
 		payr.saveAll(Arrays.asList(pay1,pay2));
+		
+		OrderItem item1 = new OrderItem(order1, p1, 0.00, 1, 2000.00);
+		OrderItem item2 = new OrderItem(order1, p1, 0.00, 2, 80.00);
+		OrderItem item3 = new OrderItem(order2, p2, 100.00, 1, 800.00);
+		
+		order1.getItens().addAll(Arrays.asList(item1,item2));
+		order2.getItens().addAll(Arrays.asList(item3));
+		
+		p1.getItens().addAll(Arrays.asList(item1));
+		p2.getItens().addAll(Arrays.asList(item3));
+		p3.getItens().addAll(Arrays.asList(item2));
+		
+		ir.saveAll(Arrays.asList(item1,item2,item3));
+		
 
 	}
 

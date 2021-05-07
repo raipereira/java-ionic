@@ -1,39 +1,42 @@
 package com.casestudy.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 
 import com.casestudy.model.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class PaymentSlip extends Payment{
 	
-	private Date dueDate;
-	private Date datePyment;
+	@JsonFormat(pattern = "MM/dd/yyyy")
+	private LocalDateTime dueDate;
+	@JsonFormat(pattern = "MM/dd/yyyy")
+	private LocalDateTime datePyment;
 	
 	public PaymentSlip() {
 	}
 
-	public PaymentSlip(Integer id, StatusPayment statusPay, Ordering order, Date duePyment, Date datePyment) {
+	public PaymentSlip(Integer id, StatusPayment statusPay, Ordeer order, LocalDateTime ld, LocalDateTime datePyment) {
 		super(id, statusPay, order);
-		this.dueDate = duePyment;
+		this.dueDate = ld;
 		this.datePyment = datePyment;
 	}
 
-	public Date getDueDate() {
+	public LocalDateTime getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
 
-	public Date getDatePyment() {
+	public LocalDateTime getDatePyment() {
 		return datePyment;
 	}
 
-	public void setDatePyment(Date datePyment) {
+	public void setDatePyment(LocalDateTime datePyment) {
 		this.datePyment = datePyment;
 	}
 	
