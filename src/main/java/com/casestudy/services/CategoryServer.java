@@ -3,10 +3,12 @@ package com.casestudy.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.casestudy.model.Category;
 import com.casestudy.repositories.CategoryRepository;
+import com.casestudy.services.exceptions.DataIntegrityException;
 import com.casestudy.services.exceptions.ObjectNotFoundExeption;
 
 @Service
@@ -34,6 +36,18 @@ public class CategoryServer {
 	public Category update(Category obj) {
 		find(obj.getId());
 		return cr.save(obj);
+		
+	}
+
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+			cr.deleteById(id);
+		}catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException(
+				"I'm sorry! it's not possible to delete the category associated with the Product");
+			}
 		
 	}
 
