@@ -1,11 +1,9 @@
 package com.casestudy;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -104,8 +102,6 @@ public class JavaionicApplication implements CommandLineRunner {
 		clr.save(cl1);
 		addr.saveAll(Arrays.asList(ad1, ad2));
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		Instant instant = Instant.parse( "2013-09-29T18:46:19Z");
 		

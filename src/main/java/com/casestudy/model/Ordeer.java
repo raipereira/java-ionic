@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Ordeer implements Serializable {
@@ -25,14 +24,12 @@ public class Ordeer implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "UTC-12:00")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime date;
 	
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
 	private Payment pyment;
 	
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;

@@ -24,4 +24,10 @@ public class CategoryServer {
 				"Object it's not found id." + id + " Type " + Category.class.getName()));
 	}
 
+
+	public Category insert(Category obj) {
+		obj.setId(null);
+		return cr.save(obj);
+	}
+
 }
