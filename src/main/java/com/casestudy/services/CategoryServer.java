@@ -16,7 +16,7 @@ public class CategoryServer {
 	private CategoryRepository cr;
 	
 	
-	public Category findOne(Integer id) {
+	public Category find(Integer id) {
 		
 		Optional<Category> cp = cr.findById(id);
 		
@@ -28,6 +28,13 @@ public class CategoryServer {
 	public Category insert(Category obj) {
 		obj.setId(null);
 		return cr.save(obj);
+	}
+
+
+	public Category update(Category obj) {
+		find(obj.getId());
+		return cr.save(obj);
+		
 	}
 
 }
