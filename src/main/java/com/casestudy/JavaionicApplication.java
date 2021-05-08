@@ -62,8 +62,18 @@ public class JavaionicApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Category c1 = new Category(null, "Informatics");
-		Category c2 = new Category(null, "Office");
+		Category c1 = new Category(null, "Cell Phones & Accessories");
+		Category c2 = new Category(null, "Clothing, Shoes & Jewelry");
+		Category c3 = new Category(null, "Computers");
+		Category c4 = new Category(null, "courses");
+		Category c5 = new Category(null, "Digital Educational Resources");
+		Category c6 = new Category(null, "Digital Music");
+		Category c7 = new Category(null, "Eletronic");
+		Category c8 = new Category(null, "Gift Cards");
+		Category c9 = new Category(null, "Grocery & Gourmet Food");
+		Category c10 = new Category(null, "Healh, Household & Baby Care");
+		Category c11 = new Category(null, "Home Kitchen");
+		Category c12 = new Category(null, "Industrial & Scientific");
 
 		Product p1 = new Product(null, "Computer", 200.00);
 		Product p2 = new Product(null, "Printer", 800.00);
@@ -76,7 +86,7 @@ public class JavaionicApplication implements CommandLineRunner {
 		p2.getCategories().addAll(Arrays.asList(c1, c2));
 		p3.getCategories().addAll(Arrays.asList(c1));
 
-		cr.saveAll(Arrays.asList(c1, c2));
+		cr.saveAll(Arrays.asList(c1, c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12));
 		pr.saveAll(Arrays.asList(p1, p2, p3));
 
 		State s1 = new State(null, "California");
