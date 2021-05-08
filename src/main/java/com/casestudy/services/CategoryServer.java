@@ -1,5 +1,6 @@
 package com.casestudy.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class CategoryServer {
 	@Autowired
 	private CategoryRepository cr;
 	
+	
+	public List<Category> findAll() {
+		
+		return cr.findAll();
+	}
 	
 	public Category find(Integer id) {
 		
@@ -50,5 +56,6 @@ public class CategoryServer {
 			}
 		
 	}
+
 
 }
