@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +57,8 @@ public class CategoryResouce {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save(@RequestBody Category obj){
+	public ResponseEntity<Void> save(@Valid @RequestBody CategoryDTO objDto){
+		Category obj = service.fromDto(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				  .path("{/}").buildAndExpand(obj.getId()).toUri();

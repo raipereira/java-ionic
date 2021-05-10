@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.casestudy.model.Category;
 import com.casestudy.repositories.CategoryRepository;
+import com.casestudy.resouces.dto.CategoryDTO;
 import com.casestudy.services.exceptions.DataIntegrityException;
 import com.casestudy.services.exceptions.ObjectNotFoundExeption;
 
@@ -63,6 +64,11 @@ public class CategoryServer {
 			throw new DataIntegrityException(
 				"I'm sorry! it's not possible to delete the category associated with the Product");
 			}
+	}
+
+
+	public Category fromDto(CategoryDTO objDto) {
+		return new Category(objDto.getId(), objDto.getName());
 	}
 
 

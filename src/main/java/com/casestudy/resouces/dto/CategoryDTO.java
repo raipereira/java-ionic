@@ -2,12 +2,18 @@ package com.casestudy.resouces.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.casestudy.model.Category;
 
 public class CategoryDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@NotEmpty(message = "The field must not be empty")
+	@Length(min = 5, max = 50, message = "length must be between 5 and 50")
 	private String name;
 	
 	public CategoryDTO() {
