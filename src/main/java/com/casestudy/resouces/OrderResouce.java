@@ -19,9 +19,7 @@ public class OrderResouce {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> findOne(@PathVariable Integer id) {
-		
 		Ordeer obj = os.findOne(id);
-		
 		return ResponseEntity.ok().body(obj);
 	}
 
