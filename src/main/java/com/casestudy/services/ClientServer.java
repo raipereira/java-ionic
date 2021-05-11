@@ -72,7 +72,7 @@ public class ClientServer {
 			cr.deleteById(id);
 		}catch(DataIntegrityViolationException e) {
 			throw new DataIntegrityException(
-				"I'm sorry! it's not possible to delete the category associated with the Product");
+				"I'm sorry! it's not possible to delete the Client associated with one or more Orders");
 			}
 	}
 
