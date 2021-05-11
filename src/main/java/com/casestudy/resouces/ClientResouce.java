@@ -1,5 +1,6 @@
 package com.casestudy.resouces;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,14 +12,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.casestudy.model.Client;
 import com.casestudy.resouces.dto.ClientDTO;
+import com.casestudy.resouces.dto.NewClientDTO;
 import com.casestudy.services.ClientServer;
 
 @RestController
@@ -52,6 +56,15 @@ public class ClientResouce {
 		Page<Client> pages = service.findPage(page, linesPerPage, orderBy, direction);
 		Page<ClientDTO> pagesDto = pages.map(obj -> new ClientDTO(obj));
 		return ResponseEntity.ok().body(pagesDto);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Void> insert(@Valid @RequestBody NewClientDTO objDto){
+		Client obj = service.fromDto(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				  .path("{/}").buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
