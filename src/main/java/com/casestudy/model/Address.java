@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +23,7 @@ public class Address implements Serializable {
 	private Integer number;
 	private String complement;
 	private Integer zip;
-	
+	 	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -46,61 +47,76 @@ public class Address implements Serializable {
 		this.city = city;
 	}
 
+
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
 	public String getStreet() {
 		return street;
 	}
+
 
 	public void setStreet(String street) {
 		this.street = street;
 	}
 
+
 	public Integer getNumber() {
 		return number;
 	}
+
 
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
 
+
 	public String getComplement() {
 		return complement;
 	}
+
 
 	public void setComplement(String complement) {
 		this.complement = complement;
 	}
 
+
 	public Integer getZip() {
 		return zip;
 	}
+
 
 	public void setZip(Integer zip) {
 		this.zip = zip;
 	}
 
+
 	public Client getClient() {
 		return client;
 	}
 
+
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	
+
+
 	public City getCity() {
 		return city;
 	}
 
+
 	public void setCity(City city) {
 		this.city = city;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -109,6 +125,7 @@ public class Address implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -126,7 +143,8 @@ public class Address implements Serializable {
 			return false;
 		return true;
 	}
-
 	
+	
+
 
 }

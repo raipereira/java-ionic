@@ -2,22 +2,36 @@ package com.casestudy.resouces.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.casestudy.services.validation.ClientInsert;
+
+@ClientInsert
 public class NewClientDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	
+	@NotEmpty
+	@Length(max = 50, min = 10)
 	private String name;
+	@NotEmpty
+	@Email
 	private String email;
+	@NotEmpty
 	private String ssnOrItin;
 	private Integer tipe;
-	
+	@NotEmpty
 	private String street;
+	@NotNull
 	private Integer number;
 	private String complement;
+	@NotNull
 	private Integer zip;
-	
 	private Integer cityId;
-	
+	@NotEmpty
 	private String phone1;
 	private String phone2;
 	private String phone3;

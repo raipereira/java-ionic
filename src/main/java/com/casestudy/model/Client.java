@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import javax.persistence.OneToMany;
 import com.casestudy.model.enums.TipeBusiness;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +28,7 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	@Column(unique = true)
 	private String email;
 	private String ssnOrItin;
 	private Integer tipe;
@@ -84,12 +87,12 @@ public class Client implements Serializable {
 		this.ssnOrItin = ssnOrItin;
 	}
 
-	public TipeBusiness getTipe() {
-		return TipeBusiness.convertToEnum(tipe);
+	public Integer getTipe() {
+		return tipe;
 	}
 
-	public void setTipe(TipeBusiness tipe) {
-		this.tipe = tipe.getCod();
+	public void setTipe(Integer tipe) {
+		this.tipe = tipe;
 	}
 
 	public List<Address> getAddresses() {
@@ -99,8 +102,6 @@ public class Client implements Serializable {
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
-	
-	
 
 	public Set<String> getPhonenumbers() {
 		return phonenumbers;
@@ -109,7 +110,7 @@ public class Client implements Serializable {
 	public void setPhonenumbers(Set<String> phonenumbers) {
 		this.phonenumbers = phonenumbers;
 	}
-	
+
 	public List<Ordeer> getOrders() {
 		return orders;
 	}
@@ -142,5 +143,9 @@ public class Client implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+	
+	
 
 }
