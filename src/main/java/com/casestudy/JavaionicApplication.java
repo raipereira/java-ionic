@@ -77,17 +77,35 @@ public class JavaionicApplication implements CommandLineRunner {
 
 		Product p1 = new Product(null, "Computer", 200.00);
 		Product p2 = new Product(null, "Printer", 800.00);
-		Product p3 = new Product(null, "Mouse", 80.00);
+		Product p3 = new Product(null, "produt3", 80.00);
+		Product p4 = new Product(null, "produt4", 80.00);
+		Product p5 = new Product(null, "produt5", 80.00);
+		Product p6 = new Product(null, "produt6", 80.00);
+		Product p7 = new Product(null, "produt7", 80.00);
+		
+		
 
 		c1.getProducts().addAll(Arrays.asList(p1, p2, p3));
 		c2.getProducts().addAll(Arrays.asList(p2));
+		c3.getProducts().addAll(Arrays.asList(p4));
+		c4.getProducts().addAll(Arrays.asList(p5));
+		c5.getProducts().addAll(Arrays.asList(p6));
+		c6.getProducts().addAll(Arrays.asList(p7));
+		c7.getProducts().addAll(Arrays.asList(p7));
+		c8.getProducts().addAll(Arrays.asList(p7));
 
 		p1.getCategories().addAll(Arrays.asList(c1));
 		p2.getCategories().addAll(Arrays.asList(c1, c2));
 		p3.getCategories().addAll(Arrays.asList(c1));
+		p4.getCategories().addAll(Arrays.asList(c3));
+		p5.getCategories().addAll(Arrays.asList(c4));
+		p6.getCategories().addAll(Arrays.asList(c5));
+		p7.getCategories().addAll(Arrays.asList(c6));
+		p7.getCategories().addAll(Arrays.asList(c7));
+		p7.getCategories().addAll(Arrays.asList(c8));
 
 		cr.saveAll(Arrays.asList(c1, c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12));
-		pr.saveAll(Arrays.asList(p1, p2, p3));
+		pr.saveAll(Arrays.asList(p1, p2, p3,p4,p5,p6,p7));
 
 		State s1 = new State(null, "California");
 		State s2 = new State(null, "Florida");
