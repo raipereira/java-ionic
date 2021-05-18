@@ -99,6 +99,15 @@ public class Ordeer implements Serializable {
 	public void setItens(Set<OrderItem> itens) {
 		this.itens = itens;
 	}
+	
+	public double getAmount() {
+		double sum = 0.0;
+		for(OrderItem iten : itens) {
+			sum = sum + iten.getSubtotal();
+		}
+		
+		return sum;
+	}
 
 	@Override
 	public int hashCode() {

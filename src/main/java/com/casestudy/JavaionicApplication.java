@@ -154,7 +154,7 @@ public class JavaionicApplication implements CommandLineRunner {
 		payr.saveAll(Arrays.asList(pay1,pay2));
 		
 		OrderItem item1 = new OrderItem(order1, p1, 0.00, 1, 2000.00);
-		OrderItem item2 = new OrderItem(order1, p1, 0.00, 2, 80.00);
+		OrderItem item2 = new OrderItem(order1, p3, 0.00, 2, 80.00);
 		OrderItem item3 = new OrderItem(order2, p2, 100.00, 1, 800.00);
 		
 		order1.getItens().addAll(Arrays.asList(item1,item2));

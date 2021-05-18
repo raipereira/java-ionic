@@ -40,7 +40,7 @@ public class ProductServer {
 	public Page<Product> search(String name, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		List<Category> categories = cr.findAllById(ids);
-		return pr.findDistinctByNameContainingAndCategoriesIn(name, categories, pageRequest);
+		return pr.search(name, categories, pageRequest);
 	}
 
 	
