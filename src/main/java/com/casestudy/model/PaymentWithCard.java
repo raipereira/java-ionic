@@ -3,8 +3,10 @@ package com.casestudy.model;
 import javax.persistence.Entity;
 
 import com.casestudy.model.enums.StatusPayment;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
+@JsonTypeName("paymentWithCard")
 public class PaymentWithCard extends Payment {
 	
 	private Integer numberInstallments;

@@ -143,10 +143,10 @@ public class JavaionicApplication implements CommandLineRunner {
 		Ordeer order2 = new Ordeer(null, ld, cl1, ad2);
 
 		Payment pay1 = new PaymentWithCard(null, StatusPayment.PAID, order1, 5);
-		order1.setPyment(pay1);
+		order1.setPayment(pay1);
 
 		Payment pay2 = new PaymentSlip(null, StatusPayment.PENDING, order2, ld, null);
-		order2.setPyment(pay2);
+		order2.setPayment(pay2);
 
 		cl1.getOrders().addAll(Arrays.asList(order1, order2));
 		

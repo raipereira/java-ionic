@@ -57,7 +57,7 @@ public class CategoryResouce {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody CategoryDTO objDto){
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDTO objDto){
 		Category obj = service.fromDto(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

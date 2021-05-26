@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 
 import com.casestudy.model.enums.StatusPayment;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 @Entity
+@JsonTypeName("paymentWithSlip")
 public class PaymentSlip extends Payment{
 	
 	@JsonFormat(pattern = "MM/dd/yyyy")

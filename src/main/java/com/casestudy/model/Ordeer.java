@@ -28,7 +28,7 @@ public class Ordeer implements Serializable {
 	private LocalDateTime date;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
-	private Payment pyment;
+	private Payment payment;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -84,12 +84,12 @@ public class Ordeer implements Serializable {
 		this.deliveryAddress = deliveryAddress;
 	}
 	
-	public Payment getPyment() {
-		return pyment;
+	public Payment getPayment() {
+		return payment;
 	}
 
-	public void setPyment(Payment pyment) {
-		this.pyment = pyment;
+	public void setPayment(Payment pyment) {
+		this.payment = pyment;
 	}
 	
 	public Set<OrderItem> getItens() {
